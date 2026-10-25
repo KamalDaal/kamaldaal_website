@@ -1,147 +1,374 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kamal Daal | Portfolio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kamal Kumar | Cosmic Portfolio</title>
+<meta name="theme-color" content="#050403">
+<meta name="description" content="Kamal Kumar — pharmacy student, research enthusiast and innovator.">
+
 <style>
-:root{--gold:#ffd778;--bg:#050611;--text:#f5f2e9}
-*{box-sizing:border-box;scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:16px Arial,sans-serif}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.3;
-background-image:radial-gradient(white 1px,transparent 1px);
-background-size:47px 47px;animation:stars 30s linear infinite}
-@keyframes stars{to{background-position:180px 250px}}
-header{padding:18px 7%;display:flex;justify-content:space-between;align-items:center;
-position:sticky;top:0;background:#050611dd;backdrop-filter:blur(12px);z-index:5}
-a{color:var(--gold);text-decoration:none}
-nav{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}
-.hero{text-align:center;padding:65px 20px 45px;position:relative}
-.planet{width:145px;height:145px;border-radius:50%;margin:auto auto 24px;
-background:radial-gradient(circle at 30% 25%,#fff4bb,#d6a63f 35%,#6440a8 70%,#101027);
-box-shadow:0 0 35px #d8ac5570;cursor:pointer;transition:transform .8s,filter .8s}
-.planet:hover{filter:hue-rotate(80deg)}
-.profile{width:105px;height:105px;border-radius:50%;object-fit:cover;
-border:3px solid var(--gold);margin-bottom:16px}
-h1{font-size:clamp(32px,6vw,58px);margin:8px}
-h2{color:var(--gold)}
-.gold{color:var(--gold)}
-section{max-width:900px;margin:auto;padding:38px 22px;position:relative}
-.card{border:1px solid #8c713b66;border-radius:16px;padding:20px;
-background:#ffffff07;margin:14px 0;transition:.25s}
-.card:hover{transform:translateY(-4px);border-color:var(--gold)}
-.btn{display:inline-block;padding:11px 17px;border:1px solid var(--gold);
-border-radius:25px;margin:7px}
-footer{text-align:center;padding:35px;color:#aaa}
+:root{--gold:#e9bf62;--pale:#ffe8a5;--ink:#050403;--muted:#c4bba8;--line:#bd913a55}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:#f8f2e5;font-family:Arial,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+.stars,.stars:before,.stars:after{
+ position:fixed;inset:0;content:"";pointer-events:none;
+ background-image:
+ radial-gradient(1px 1px at 20px 30px,#ffe8a5 99%,transparent),
+ radial-gradient(1px 1px at 120px 80px,#e9bf62 99%,transparent),
+ radial-gradient(2px 2px at 220px 180px,#fff2c5 99%,transparent),
+ radial-gradient(1px 1px at 310px 50px,#d6a84b 99%,transparent);
+ background-size:360px 260px;
+ animation:starDrift 80s linear infinite;
+ opacity:.55;z-index:-2
+}
+.stars:before{background-size:510px 370px;animation-duration:110s;opacity:.5;transform:scale(1.2)}
+.stars:after{background-size:210px 190px;animation-duration:55s;opacity:.3}
+@keyframes starDrift{to{background-position:360px 520px}}
+
+.nav{
+ min-height:70px;padding:16px 5%;display:flex;align-items:center;
+ justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);
+ background:#050403e8;backdrop-filter:blur(12px);
+ position:sticky;top:0;z-index:20
+}
+.brand{font-size:13px;letter-spacing:3px;color:var(--gold);white-space:nowrap}
+.navlinks{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:12px;color:#e9e0cc}
+.navlinks a:hover{color:var(--pale)}
+.navbtn,.btn{
+ border:1px solid var(--gold);padding:12px 18px;color:var(--pale);
+ font-size:12px;display:inline-block;transition:.25s;background:#0b0905
+}
+.btn.primary{background:linear-gradient(110deg,#ffe39a,#c38a24);color:#1b1204;border-color:#f4d782}
+.btn:hover,.navbtn:hover{box-shadow:0 0 24px #dcae4d70;transform:translateY(-2px)}
+
+.hero{
+ min-height:590px;display:grid;grid-template-columns:.95fr 1.05fr;
+ align-items:center;padding:45px 5%;position:relative;isolation:isolate;
+ border-bottom:1px solid var(--line);overflow:hidden
+}
+.hero:before{
+ content:"";position:absolute;inset:0;z-index:-1;
+ background:radial-gradient(ellipse at 74% 45%,#a66b1e2b,transparent 40%),
+ radial-gradient(ellipse at 10% 100%,#b67b1e1c,transparent 45%)
+}
+.eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
+.hero h1{font-family:Georgia,serif;font-size:clamp(42px,6vw,76px);line-height:.98;font-weight:400;letter-spacing:1px;margin:22px 0 16px}
+.hero h1 span{color:var(--gold)}
+.role{font-size:14px;color:#f0dfb5}
+.typed{color:var(--gold);font-size:14px;min-height:22px;margin:24px 0}
+.welcome{max-width:440px;color:#d1c8b5;font-size:14px;line-height:1.8}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+
+.cosmos{height:470px;position:relative;display:grid;place-items:center;perspective:900px}
+.orbit{
+ position:absolute;width:min(95%,510px);height:180px;border:1px solid #e8c166a0;
+ border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 15px #c99b3930;
+ animation:orbitFloat 8s ease-in-out infinite
+}
+.orbit.two{width:min(88%,450px);height:270px;transform:rotate(48deg);border-color:#f3d78b66;animation-duration:11s}
+.orbit.three{width:min(100%,540px);height:340px;transform:rotate(-58deg);border-color:#c38a3e55;animation-duration:14s}
+
+.planet{
+ position:absolute;border-radius:50%;
+ background:radial-gradient(circle at 28% 23%,#fff1b3 0,#d5a44b 8%,#78501d 28%,#24170b 53%,#030303 78%);
+ box-shadow:inset -25px -15px 38px #000,0 0 24px #e4ad3d88,0 0 70px #bf812a35;
+ animation:planetSpin 22s linear infinite;cursor:pointer;transition:filter .7s,box-shadow .7s
+}
+.planet.main{width:clamp(170px,24vw,280px);height:clamp(170px,24vw,280px);z-index:2}
+.planet.small{width:65px;height:65px;top:9%;right:17%;animation-duration:30s}
+.planet.lower{width:95px;height:95px;bottom:9%;left:9%;animation-duration:26s}
+.planet:after{
+ content:"";position:absolute;inset:12%;border-radius:50%;
+ background:repeating-linear-gradient(158deg,transparent 0 12px,#f6d17d20 13px 15px,transparent 17px 27px);
+ mix-blend-mode:screen
+}
+.planet.main:before{
+ content:"";position:absolute;inset:-12%;border:2px solid #e5c16a77;
+ border-radius:50%;transform:rotateX(68deg) rotateZ(-20deg);box-shadow:0 0 15px #dba94366
+}
+.planet.awake{filter:hue-rotate(35deg) brightness(1.35);box-shadow:inset -25px -15px 38px #000,0 0 45px #ffe69a,0 0 110px #e8b94f88}
+@keyframes planetSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes orbitFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+
+.portrait-wrap{
+ position:absolute;z-index:4;width:clamp(115px,16vw,175px);height:clamp(115px,16vw,175px);
+ border-radius:50%;padding:5px;background:linear-gradient(135deg,#fff0b1,#9b671b,#f7d980);
+ box-shadow:0 0 28px #e8ba5480,0 0 80px #b77d2b35;
+ animation:portraitPulse 4s ease-in-out infinite
+}
+.portrait-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;border:3px solid #080603}
+.portrait-wrap:after{content:"";position:absolute;inset:-16px;border:1px solid #e9bf6266;border-radius:50%;animation:ringPulse 5s ease-in-out infinite}
+@keyframes portraitPulse{50%{box-shadow:0 0 42px #e8ba54a0,0 0 100px #b77d2b55}}
+@keyframes ringPulse{50%{transform:scale(1.08);opacity:.5}}
+
+.scrollhint{position:absolute;bottom:16px;left:50%;font-size:10px;letter-spacing:3px;color:#b99a55;transform:translateX(-50%)}
+section{padding:68px 5%;border-bottom:1px solid var(--line);position:relative}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:26px}
+.section-no{font-size:10px;letter-spacing:3px;color:var(--gold)}
+h2{font:400 clamp(29px,4vw,44px) Georgia,serif;margin:9px 0 0}
+h2 em{font-style:normal;color:var(--gold)}
+.aboutgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.copy{font-size:14px;line-height:1.9;color:#c9c0ae;max-width:600px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fact,.card{padding:20px;border:1px solid var(--line);background:linear-gradient(135deg,#ffffff08,#8d65100a);min-height:100px}
+.fact b,.card b{display:block;color:var(--pale);font-family:Georgia,serif;font-weight:400;font-size:17px;margin-bottom:8px}
+.fact span,.card p{font-size:12px;line-height:1.7;color:#bfb5a2;margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:#e4bd63}
+.icon{font-size:22px;color:var(--gold);margin-bottom:16px}
+.experience{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.abbott{
+ min-height:220px;border:1px solid var(--line);
+ background:radial-gradient(ellipse at 50% 100%,#9e6b252e,transparent 60%),linear-gradient(135deg,#15120c,#050403);
+ display:grid;place-items:center;text-align:center;padding:25px
+}
+.abbott strong{font:34px Georgia,serif;color:#d9d5cc}
+.abbott span{font-size:10px;letter-spacing:3px;color:var(--gold);margin-top:10px}
+.split{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.split section{border-bottom:0}
+.contact{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot{text-align:center;padding:25px;color:#8c7544;font-size:10px;letter-spacing:2px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}
+.reveal.show{opacity:1;transform:none}
+
+@media(max-width:800px){
+ .nav{align-items:flex-start;flex-direction:column}
+ .navlinks{gap:14px}
+ .hero{grid-template-columns:1fr;padding-top:48px}
+ .hero-copy{text-align:center}
+ .welcome{margin-inline:auto}
+ .actions{justify-content:center}
+ .cosmos{height:370px;grid-row:1}
+ .hero-copy{grid-row:2}
+ .scrollhint{display:none}
+ .aboutgrid,.experience{grid-template-columns:1fr}
+ .cards{grid-template-columns:1fr 1fr}
+ .split{grid-template-columns:1fr}
+ .split section:first-child{border-bottom:1px solid var(--line)}
+}
+@media(max-width:480px){
+ .navlinks{font-size:11px}
+ .cosmos{height:300px}
+ .planet.small{width:43px;height:43px}
+ .planet.lower{width:65px;height:65px}
+ .orbit{height:130px}
+ .orbit.two{height:190px}
+ .orbit.three{height:230px}
+ .facts,.cards{grid-template-columns:1fr}
+ .section-head{display:block}
+ .hero h1{font-size:43px}
+ section{padding:48px 6%}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}
+}
 </style>
 </head>
+
 <body>
-<header>
-  <b class="gold">✦ KAMAL DAAL</b>
-  <nav>
-    <a href="#about">About</a><a href="#research">Research</a>
-    <a href="#publications">Publications</a><a href="#achievements">Awards</a>
-    <a href="./albums.html">Albums</a>
-  </nav>
+<div class="stars" aria-hidden="true"></div>
+
+<header class="nav">
+ <a class="brand" href="#home">✦ KAMAL KUMAR</a>
+ <nav class="navlinks">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#research">Research</a>
+  <a href="#experience">Experience</a>
+  <a href="#achievements">Achievements</a>
+  <a href="#journey">Journey</a>
+  <a href="#contact">Contact</a>
+ </nav>
+ <a class="navbtn" href="./albums.html">Explore Albums →</a>
 </header>
 
-<div class="hero">
-  <div class="planet" id="planet" title="Touch the planet!"></div>
-  <!-- Demo photo: replace this image URL with your own photo -->
-  <img class="profile"
-  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300&h=300&fit=crop"
-  alt="Demo profile picture">
-  <h1>Kamal <span class="gold">Daal</span></h1>
-  <p>Pharmacy Student · Research Enthusiast · Innovator</p>
-  <h3 class="gold" id="typing">Exploring the future...</h3>
-  <a class="btn" href="#about">Explore My Universe ↓</a>
-  <a class="btn" href="./albums.html">View Events & Photos</a>
+<main>
+<section class="hero" id="home">
+ <div class="hero-copy">
+  <div class="eyebrow">Welcome to my universe</div>
+  <h1>KAMAL <span>KUMAR</span></h1>
+  <div class="role">Pharmacy Student | Research Enthusiast | Innovator</div>
+  <div class="typed" id="typed">Exploring Pharmaceutical Innovation</div>
+  <p class="welcome">Welcome to my universe — a space where pharmaceutical science, research, creativity, and innovation come together.</p>
+  <div class="actions">
+   <a class="btn primary" href="#about">Explore My Universe ↓</a>
+   <a class="btn" href="#journey">Discover My Journey →</a>
+  </div>
+ </div>
+
+ <div class="cosmos" aria-label="Animated golden planets and portrait">
+  <div class="orbit"></div>
+  <div class="orbit two"></div>
+  <div class="orbit three"></div>
+  <div class="planet small"></div>
+  <div class="planet lower"></div>
+  <div class="planet main" id="mainPlanet" title="Touch or click to awaken the planet"></div>
+  <div class="portrait-wrap">
+   <img src="./photos/profile.jpg"
+   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop'"
+   alt="Kamal Kumar profile photo placeholder">
+  </div>
+ </div>
+ <div class="scrollhint">SCROLL TO EXPLORE ↓</div>
+</section>
+
+<section id="about" class="reveal">
+ <div class="section-head">
+  <div>
+   <div class="section-no">01 / ABOUT ME</div>
+   <h2>My <em>Story</em></h2>
+  </div>
+  <p class="copy">A curious mind, a pharmaceutical foundation, and a passion for exploring what comes next.</p>
+ </div>
+ <div class="aboutgrid">
+  <div>
+   <p class="copy">I am Kamal Kumar, a Bachelor of Pharmacy student at Jagannath University, Jaipur, Rajasthan, India. I am interested in pharmaceutical sciences, drug discovery, research, scientific writing, and turning ideas into meaningful innovation.</p>
+   <p class="copy">My journey includes industrial training, academic conferences, research presentations, and patent-oriented projects.</p>
+   <a class="btn" href="#research">Know More About Me →</a>
+  </div>
+  <div class="facts">
+   <div class="fact"><b>Education</b><span>Bachelor of Pharmacy (B.Pharm)</span></div>
+   <div class="fact"><b>University</b><span>Jagannath University, Jaipur, India</span></div>
+   <div class="fact"><b>Academic Interest</b><span>Pharmaceutical sciences & drug discovery</span></div>
+   <div class="fact"><b>Research Interests</b><span>Nanotechnology, targeted drug delivery, advanced therapeutics</span></div>
+  </div>
+ </div>
+</section>
+
+<section id="research" class="reveal">
+ <div class="section-head">
+  <div>
+   <div class="section-no">02 / RESEARCH INTERESTS</div>
+   <h2>Exploring the Future of <em>Healthcare</em></h2>
+  </div>
+ </div>
+ <div class="cards">
+  <article class="card">
+   <div class="icon">✧</div>
+   <b>Nanotechnology</b>
+   <p>Exploring nanoscale approaches for next-generation therapeutics.</p>
+  </article>
+  <article class="card">
+   <div class="icon">◉</div>
+   <b>Targeted Drug Delivery</b>
+   <p>Interested in delivery systems designed to improve therapeutic targeting.</p>
+  </article>
+  <article class="card">
+   <div class="icon">⚕</div>
+   <b>Advanced Therapeutics</b>
+   <p>Following new ideas in drug discovery and pharmaceutical innovation.</p>
+  </article>
+ </div>
+</section>
+
+<section id="experience" class="reveal">
+ <div class="section-head">
+  <div>
+   <div class="section-no">03 / EXPERIENCE</div>
+   <h2>Industrial <em>Training</em></h2>
+  </div>
+ </div>
+ <div class="experience">
+  <div>
+   <p class="copy">Industrial training at Abbott Healthcare Pvt. Ltd., Baddi, Himachal Pradesh, from 9 June to 8 July 2026. Gained exposure to production, Quality Assurance, documentation practices, and Quality Control.</p>
+   <a class="btn" href="./albums.html">View Training Photos →</a>
+  </div>
+  <div class="abbott">
+   <div><strong>Abbott</strong><br><span>INDUSTRIAL TRAINING · 2026</span></div>
+  </div>
+ </div>
+</section>
+
+<div class="split">
+ <section id="achievements" class="reveal">
+  <div class="section-no">04 / ACHIEVEMENTS</div>
+  <h2>Milestones & <em>Recognition</em></h2>
+  <p class="copy">A growing collection of academic recognition, patent applications, book chapters, conference participation, and extracurricular achievements.</p>
+  <a class="btn" href="./albums.html">View Achievements →</a>
+ </section>
+
+ <section id="journey" class="reveal">
+  <div class="section-no">05 / EXPLORE MY JOURNEY</div>
+  <h2>Events, Albums & <em>Memories</em></h2>
+  <p class="copy">Explore event photographs, certificates, academic milestones, and memories from my journey.</p>
+  <a class="btn primary" href="./albums.html">Open Albums →</a>
+ </section>
 </div>
 
-<section id="about">
-  <h2>01 / About Me</h2>
-  <div class="card">B.Pharm student at Jagannath University, Jaipur, interested in
-  pharmaceutical research, nanotechnology, drug delivery and innovation.</div>
-</section>
-
-<section id="research">
-  <h2>02 / Research & Innovation</h2>
-  <div class="card"><b>Nanotechnology & Drug Delivery</b><p>Adaptive surface-switching nanocarriers and targeted therapeutics.</p></div>
-  <div class="card"><b>Patent Applications</b><p>Taste-modifying oral spray and dissolvable film; dual-layer friction-redistribution condom design.</p></div>
-</section>
-
-<section id="publications">
-  <h2>03 / Book Chapters</h2>
-  <div class="card">
-    <b>Chapter 5 — Theranostic and Personalized Nanomedicine Approaches in PCOS</b>
-    <p>Book: Nanotechnology-Based Next-Generation Therapeutics for PCOS (2025).</p>
-    <a href="https://doi.org/10.70593/978-93-7185-087-2_5" target="_blank">Read Chapter DOI ↗</a>
+<section id="contact" class="reveal">
+ <div class="contact">
+  <div>
+   <div class="section-no">06 / CONNECT</div>
+   <h2>Let's <em>Connect</em></h2>
+   <p class="copy">For research, collaboration, professional connections, or a friendly hello.</p>
   </div>
-  <div class="card">
-    <b>Chapter 7 — Translational Challenges and Future Directions in 3-D for PCOS Nanotherapy</b>
-    <p>Deep Science Publishing, 2025.</p>
-    <a href="https://doi.org/10.70593/978-93-7185-087-2_7" target="_blank">Read Chapter DOI ↗</a>
+  <div class="actions">
+   <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+   <a class="btn" href="https://github.com/KamalDaal" target="_blank" rel="noreferrer">GitHub ↗</a>
+   <a class="btn" href="./albums.html">My Journey ↗</a>
   </div>
+ </div>
 </section>
+</main>
 
-<section id="experience">
-  <h2>04 / Experience</h2>
-  <div class="card"><b>Abbott Healthcare — Baddi</b>
-  <p>Industrial Training · 9 June – 8 July 2026</p>
-  <p>Production, Quality Assurance, documentation and Quality Control exposure.</p>
-  </div>
-</section>
-
-<section id="achievements">
-  <h2>05 / Achievements</h2>
-  <div class="card">🏆 Best Student Award — Jagannath University</div>
-  <div class="card">🥇 Infographic Challenge Winner — IPA Student Forum Telangana</div>
-  <div class="card">🎤 3rd Position — Pharma Anveshan 2026 Speech Competition</div>
-  <div class="card">📜 Two Indian utility patent applications</div>
-  <div class="card">🏅 Spandan Fest — Discus Throw, Carrom & Fireless Cooking; Carrom Coordinator</div>
-  <div class="card">🌐 Poster presentations at national and international conferences</div>
-</section>
-
-<section id="contact">
-  <h2>06 / Connect</h2>
-  <div class="card">For research, collaboration and professional connections.</div>
-  <a class="btn" href="https://www.linkedin.com/" target="_blank">LinkedIn ↗</a>
-  <a class="btn" href="https://github.com/KamalDaal" target="_blank">GitHub ↗</a>
-</section>
-
-<footer>✦ Built with curiosity · Powered by the universe ✦</footer>
+<footer class="foot">✦ RESEARCH · CREATE · INNOVATE · GROW ✦</footer>
 
 <script>
-const planet=document.getElementById("planet");
-let moved=false;
-function movePlanet(){
-  moved=!moved;
-  planet.style.transform=moved
-    ?"translate(65px,12px) rotate(35deg) scale(1.08)"
-    :"translate(0,0) rotate(0) scale(1)";
-  planet.style.filter=moved
-    ?"hue-rotate(145deg) brightness(1.25)"
-    :"hue-rotate(0deg)";
-  planet.style.boxShadow=moved
-    ?"0 0 55px #55ddff":"0 0 35px #d8ac5570";
-}
-planet.addEventListener("click",movePlanet);
-planet.addEventListener("touchstart",function(e){
-  e.preventDefault();movePlanet();
-},{passive:false});
+const phrases=[
+ 'Exploring Pharmaceutical Innovation',
+ 'Researching Next-Generation Drug Delivery',
+ 'Interested in Nanotechnology & Therapeutics',
+ 'Building Ideas into Innovation'
+];
 
-const words=["Pharmacy Student","Research Enthusiast",
-"Nanotechnology Explorer","Future Innovator"];
-let w=0,c=0,del=false;
+let pi=0,ci=0,del=false;
+const typed=document.getElementById('typed');
+
 function type(){
- const el=document.getElementById("typing");
- const word=words[w];
- el.textContent=word.slice(0,c);
- if(!del&&c++===word.length){del=true;setTimeout(type,1000);return}
- if(del&&c--===0){del=false;w=(w+1)%words.length}
- setTimeout(type,del?55:100);
+ const s=phrases[pi];
+ typed.textContent=s.slice(0,ci);
+
+ if(!del&&ci<s.length){
+  ci++;
+  setTimeout(type,55);
+ }else if(!del){
+  del=true;
+  setTimeout(type,1300);
+ }else if(ci>0){
+  ci--;
+  setTimeout(type,25);
+ }else{
+  del=false;
+  pi=(pi+1)%phrases.length;
+  setTimeout(type,250);
+ }
 }
 type();
+
+const planet=document.getElementById('mainPlanet');
+planet.addEventListener('click',()=>{
+ planet.classList.toggle('awake');
+});
+planet.addEventListener('touchstart',()=>{
+ planet.classList.toggle('awake');
+},{passive:true});
+
+const obs=new IntersectionObserver(entries=>{
+ entries.forEach(e=>{
+  if(e.isIntersecting){
+   e.target.classList.add('show');
+   obs.unobserve(e.target);
+  }
+ });
+},{threshold:.12});
+
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
