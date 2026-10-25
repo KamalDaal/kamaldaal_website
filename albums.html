@@ -138,7 +138,7 @@ footer { margin-top:45px;padding:20px 0;border-top:1px solid var(--line);color:#
 <body>
 <div class="wrap">
 <nav>
-  <a class="brand" href="./index.html" style="text-decoration:none;color:var(--text)">KAMAL<span>DAAL</span></a>
+  <a class="brand" href="./index.html" style="text-decoration:none;color:var(--text)">KAMAL <span>KUMAR</span></a>
   <div class="navlinks">
     <a href="./index.html">Home</a>
     <a href="./albums.html">Albums & Events</a>
@@ -300,37 +300,6 @@ Represented the Department of Pharmacy, Jagannath University, Jaipur.`,
    photos:["https://raw.githubusercontent.com/KamalDaal/kamaldaal_website/main/photos%20Album/AIR%20109%20NEC%202025.jpg"]
  },
  {
-   id:"spandan",
-  title:"Spandan 2025–26 — Sports & Cultural Fest",
-  category:"Extracurricular",
-  date:"2025–2026",
-  location:"Jagannath University, Jaipur",
-  description:`Annual Sports & Cultural Fest — Spandan 2025–26
-
-🏆 Winner — Athletics (Discus Throw)
-🏆 Winner — Take the Queen (Carrom)
-🏆 Winner — Fireless Cooking
-🎯 Served as Carrom Coordinator
-
-The fest tested discipline, creativity, teamwork and leadership beyond academics. Cultural events, shared memories and DJ Night made the celebration memorable.
-
-Grateful to represent B.Pharmacy and thankful to friends, mentors and the organizing team.
-
-This entry intentionally contains details only, with no photo gallery.`,
-  cover:null,
-  photos:[]
- },
- {
-  id:"pharma-anveshan",
-  title:"Pharma Anveshan 2026 — Speech Competition",
-  category:"Competitions",
-  date:"2026",
-  location:"Venue to be confirmed",
-  description:`Secured 3rd Position in the Speech Competition at Pharma Anveshan 2026, organized on the occasion of the birth anniversary of the legendary pharmacist Prof. M. L. Schroff.`,
-  cover:null,
-  photos:[]
- },
- {
   id:"npw-telangana",
   title:"National Pharmacy Week 2025 — Infographic Challenge",
   category:"Awards",
@@ -441,7 +410,9 @@ function make(tag, cls, text) {
 }
 
 function categories() {
-  return ["All", ...new Set(EVENTS.map(e => e.category))];
+  const found = [...new Set(EVENTS.map(e => e.category))];
+  const remaining = found.filter(category => category !== "Patents" && category !== "All");
+  return ["Patents", ...remaining, "All"];
 }
 
 function renderFilters() {
