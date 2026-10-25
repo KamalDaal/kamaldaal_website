@@ -4,198 +4,607 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#030303">
+<meta name="description" content="Kamal Kumar's portfolio of pharmacy, research, conferences, patents, awards and achievements.">
 <title>Albums & Events | KamalDaal</title>
 <style>
-:root{--bg:#030303;--gold:#d4af37;--gold2:#ffe7a0;--text:#f7f4eb;--muted:#aaa49a;--line:#493a17}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 20% 0%,#241b07,transparent 40%),var(--bg);color:var(--text);font:16px/1.6 system-ui,sans-serif}
-.wrap{max-width:1200px;margin:auto;padding:24px}
-nav{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.brand{font-weight:900;letter-spacing:2px}.brand span{color:var(--gold)}
-a{color:var(--gold2)}
-.hero{padding:55px 0 25px}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:12px}
-h1{font-size:clamp(38px,7vw,76px);line-height:1.05;margin:12px 0}
-.gold{background:linear-gradient(90deg,#b8860b,#ffe7a0,#d4af37);color:transparent;background-clip:text}
-.hero p{max-width:650px;color:var(--muted)}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
-.filters button{border:1px solid var(--line);border-radius:30px;background:#100d06;color:var(--gold2);padding:9px 14px;cursor:pointer}
-.filters button.active{background:#332608;border-color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-.card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#090909;transition:.25s}
-.card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 10px 35px #d4af3725}
-.cover{width:100%;height:220px;object-fit:cover;background:#111;display:block}
-.body{padding:16px}.body h2{font-size:20px;margin:8px 0}
-.meta{color:var(--muted);font-size:14px}.pill{display:inline-block;color:var(--gold2);border:1px solid var(--line);border-radius:30px;padding:3px 9px;font-size:12px}
-.body p{color:#c5c0b5}.btn{border:1px solid #6a541e;border-radius:9px;padding:8px 12px;background:#171207;color:var(--gold2);cursor:pointer}
-.notice{color:var(--muted);padding:24px 0}
-.modal{display:none;position:fixed;inset:0;background:#000e;z-index:5;overflow:auto;padding:20px}
-.modal.open{display:block}.modalbox{max-width:1000px;margin:4vh auto;background:#090909;border:1px solid var(--line);border-radius:18px;padding:20px}
-.modalhead{display:flex;justify-content:space-between;gap:15px;align-items:start}
-.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:20px}
-.photos img{width:100%;height:230px;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:zoom-in}
-.lightbox{display:none;position:fixed;inset:0;background:#000f;z-index:10;align-items:center;justify-content:center;padding:20px}
-.lightbox.open{display:flex}.lightbox img{max-width:95vw;max-height:90vh;object-fit:contain}
-footer{margin-top:45px;padding:20px 0;border-top:1px solid var(--line);color:#777}
-@media(max-width:600px){.wrap{padding:16px}.hero{padding-top:35px}.cover{height:190px}}
+:root {
+  --bg:#030303;
+  --panel:#0b0b0b;
+  --gold:#d4af37;
+  --gold2:#ffe7a0;
+  --text:#f7f4eb;
+  --muted:#aaa49a;
+  --line:#493a17;
+}
+* { box-sizing:border-box }
+html { scroll-behavior:smooth }
+body {
+  margin:0;
+  background:radial-gradient(ellipse at 15% 0%,#241b07,transparent 38%),var(--bg);
+  color:var(--text);
+  font:16px/1.65 system-ui,-apple-system,sans-serif;
+}
+a { color:var(--gold2) }
+button,input { font:inherit }
+button { cursor:pointer }
+.wrap { max-width:1200px;margin:auto;padding:24px }
+nav {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:18px;
+}
+.brand { font-weight:900;letter-spacing:2px;font-size:19px }
+.brand span { color:var(--gold) }
+.navlinks { display:flex;gap:20px;flex-wrap:wrap }
+.navlinks a { text-decoration:none }
+.navlinks a:hover { color:white }
+.hero { padding:58px 0 26px }
+.eyebrow { color:var(--gold);letter-spacing:4px;font-size:12px }
+h1 { font-size:clamp(38px,7vw,76px);line-height:1.06;margin:12px 0 }
+.gold {
+  background:linear-gradient(90deg,#b8860b,#ffe7a0,#d4af37);
+  color:transparent;background-clip:text;
+}
+.hero p { max-width:680px;color:var(--muted) }
+.toolbar { display:grid;gap:14px;margin:26px 0 }
+.search {
+  width:100%;padding:13px 15px;background:#0c0c0c;
+  border:1px solid var(--line);border-radius:12px;color:var(--text);
+  outline:none;
+}
+.search:focus { border-color:var(--gold) }
+.filters { display:flex;gap:8px;flex-wrap:wrap }
+.filters button,.btn {
+  border:1px solid var(--line);border-radius:30px;
+  background:#100d06;color:var(--gold2);padding:9px 14px;
+}
+.filters button.active,.filters button:hover,.btn:hover {
+  background:#332608;border-color:var(--gold);
+}
+.grid {
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
+  gap:18px;
+}
+.card {
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  background:linear-gradient(150deg,#101010,#070707);
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+  display:flex;flex-direction:column;min-width:0;
+}
+.card:hover {
+  transform:translateY(-4px);border-color:var(--gold);
+  box-shadow:0 10px 35px #d4af3720;
+}
+.cover {
+  width:100%;height:210px;object-fit:cover;background:#111;display:block;
+}
+.no-cover {
+  height:145px;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at center,#332608,#0a0a0a 65%);
+  color:var(--gold);font-size:38px;border-bottom:1px solid var(--line);
+}
+.body { padding:17px;display:flex;flex-direction:column;flex:1 }
+.body h2 { font-size:20px;line-height:1.35;margin:10px 0 }
+.meta { color:var(--muted);font-size:13px }
+.pill {
+  display:inline-block;align-self:flex-start;color:var(--gold2);
+  border:1px solid var(--line);border-radius:30px;padding:3px 10px;
+  font-size:12px;
+}
+.body p { color:#c5c0b5;font-size:14px }
+.body .btn { margin-top:auto;align-self:flex-start;border-radius:9px }
+.notice { color:var(--muted);padding:25px 0 }
+footer { margin-top:45px;padding:20px 0;border-top:1px solid var(--line);color:#777;font-size:13px }
+.modal {
+  display:none;position:fixed;inset:0;background:#000e;z-index:5;
+  overflow:auto;padding:18px;
+}
+.modal.open { display:block }
+.modalbox {
+  max-width:1000px;margin:3vh auto;background:#090909;
+  border:1px solid var(--line);border-radius:18px;padding:clamp(16px,4vw,28px);
+}
+.modalhead {
+  display:flex;justify-content:space-between;gap:18px;align-items:flex-start;
+}
+.modalhead h2 { font-size:clamp(25px,4vw,38px);line-height:1.2;margin:12px 0 }
+.modalhead p { color:#d0cabc;white-space:pre-line }
+.modalcontent { color:#d0cabc;white-space:pre-line }
+.modalcontent a { overflow-wrap:anywhere }
+.modalactions { display:flex;gap:10px;flex-wrap:wrap;margin-top:18px }
+.photos {
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:12px;margin-top:22px;
+}
+.photos img {
+  width:100%;height:220px;object-fit:cover;border-radius:10px;
+  border:1px solid var(--line);cursor:zoom-in;background:#111;
+}
+.lightbox {
+  display:none;position:fixed;inset:0;background:#000f;z-index:10;
+  align-items:center;justify-content:center;padding:20px;cursor:zoom-out;
+}
+.lightbox.open { display:flex }
+.lightbox img { max-width:95vw;max-height:90vh;object-fit:contain }
+.smallnote { color:var(--muted);font-size:13px }
+@media(max-width:600px) {
+  .wrap { padding:16px }
+  .hero { padding-top:36px }
+  .cover { height:185px }
+  .modalhead { flex-direction:column }
+  .modalhead .btn { order:-1;align-self:flex-end }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 <nav>
-  <div class="brand">KAMAL<span>DAAL</span></div>
-  <div><a href="./index.html">Home</a>　<a href="./albums.html">Albums</a></div>
+  <a class="brand" href="./index.html" style="text-decoration:none;color:var(--text)">KAMAL<span>DAAL</span></a>
+  <div class="navlinks">
+    <a href="./index.html">Home</a>
+    <a href="./albums.html">Albums & Events</a>
+  </div>
 </nav>
 
 <section class="hero">
-  <div class="eyebrow">EVENTS · MILESTONES · MEMORIES</div>
+  <div class="eyebrow">EVENTS · RESEARCH · MILESTONES</div>
   <h1>Every chapter.<br><span class="gold">A story worth keeping.</span></h1>
-  <p>My journey through pharmaceutical industry, research, competitions, conferences and achievements.</p>
+  <p>Explore my journey through pharmaceutical industry, research conferences, publications, patents, competitions and achievements.</p>
 </section>
 
-<div id="filters" class="filters"></div>
+<div class="toolbar">
+  <input id="search" class="search" type="search" placeholder="Search events, conferences, awards..." aria-label="Search events">
+  <div id="filters" class="filters"></div>
+</div>
 <div id="gallery" class="grid"></div>
+<p id="empty" class="notice" hidden>No matching events found. Try another search or category.</p>
 
-<footer>© <span id="year"></span> KamalDaal · Research, innovation & pharmacy</footer>
+<footer>© <span id="year"></span> KamalDaal · Pharmacy · Research · Innovation</footer>
 </div>
 
-<div id="modal" class="modal">
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
  <div class="modalbox">
   <div class="modalhead">
-   <div><span id="mCategory" class="pill"></span><h2 id="mTitle"></h2><div id="mMeta" class="meta"></div><p id="mDescription"></p></div>
-   <button id="closeModal" class="btn">Close ✕</button>
+   <div>
+     <span id="mCategory" class="pill"></span>
+     <h2 id="mTitle"></h2>
+     <div id="mMeta" class="meta"></div>
+   </div>
+   <button id="closeModal" class="btn" type="button">Close ✕</button>
   </div>
+  <div id="mDescription" class="modalcontent"></div>
+  <div id="mLinks" class="modalactions"></div>
   <div id="mPhotos" class="photos"></div>
+  <p id="photoNote" class="smallnote"></p>
  </div>
 </div>
-<div id="lightbox" class="lightbox"><img id="lightboxImg" alt="Expanded event photo"></div>
+<div id="lightbox" class="lightbox" role="button" tabindex="0" aria-label="Close enlarged photo">
+  <img id="lightboxImg" alt="Enlarged event photograph">
+</div>
 
 <script>
-/* Add new events inside the EVENTS array below.
-   For each event, use photo paths such as "photos/abbott-1.jpg". */
+/*
+  Images currently live in the repository's photos/ root folder.
+  Filenames below are based on the files shown in your GitHub screenshot.
+  Do not rename image files unless you also update their paths here.
+*/
 const EVENTS = [
  {
+  id:"abbott",
   title:"Abbott Healthcare — Industrial Internship",
   category:"Internship",
-  date:"June – July 2026",
+  date:"9 June – 8 July 2026",
   location:"Baddi, Himachal Pradesh",
-  description:"Industrial training with exposure to Production, Quality Assurance, documentation practices and Quality Control.",
-  cover:"photos/abbott-1.jpg",
+  description:`Duration: 30 days
+
+Industrial training at Abbott Healthcare Pvt. Ltd. with exposure to:
+
+• Production operations
+• Quality Assurance (QA)
+• Batch and quality documentation
+• Quality Control (QC)
+
+This internship provided practical exposure to pharmaceutical manufacturing, quality systems and documentation practices.`,
+  cover:"photos/june%20Abbott%20(1).jpg",
   photos:[
-   "photos/abbott-1.jpg",
-   "photos/abbott-2.jpg",
-   "photos/abbott-3.jpg",
-   "photos/abbott-4.jpg",
-   "photos/abbott-5.jpg",
-   "photos/abbott-6.jpg",
-   "photos/abbott-7.jpg"
+   "photos/june%20Abbott%20(1).jpg",
+   "photos/june%20Abbott%20(1).png",
+   "photos/june%20Abbott%20(2).png",
+   "photos/june%20Abbott%20(4).jpg",
+   "photos/june%20Abbott%20(5).jpg",
+   "photos/june%20Abbott%20(6).jpg",
+   "photos/june%20Abbott%20(7).jpg",
+   "photos/june%20Abbott%20(9).jpg",
+   "photos/june%20Abbott%20(10).jpg",
+   "photos/june%20Abbott%20(11).jpg",
+   "photos/june%20Abbott%20(12).jpg",
+   "photos/certificate%20Abbott.jpg"
   ]
  },
  {
-  title:"Research Poster Presentation",
-  category:"Research",
+  id:"international-amity",
+  title:"International Conference — Amity University Lucknow",
+  category:"Conferences",
+  date:"15–16 September 2026",
+  location:"Amity University Lucknow Campus",
+  description:`Conference: Next-Generation Therapeutics: Integrating Nanotechnology with Advanced Drug Discovery Platforms
+
+Organized by Amity Institution of Pharmacy, Amity University Lucknow Campus.
+
+Research poster:
+Adaptive Surface-Switching Nanocarriers for Targeted Drug Delivery: Navigating Biological Barriers
+
+Author: Kamal Kumar
+Corresponding author: Rishabh Gupta
+Department of Pharmacy, Jagannath University, Jaipur.
+
+A valuable opportunity to learn, explore and share ideas in nanotechnology and advanced drug delivery.`,
+  cover:"photos/Int%20Conference%20Lucknow.jpg",
+  photos:["photos/Int%20Conference%20Lucknow.jpg"]
+ },
+ {
+  id:"nc-jamia",
+  title:"National Conference — Jamia Hamdard",
+  category:"Conferences",
+  date:"19 September 2025",
+  location:"New Delhi, India",
+  description:`Conference: Artificial Intelligence Enhanced Pharmacovigilance for Safer Medicines
+
+Represented the Department of Pharmacy, Jagannath University, Jaipur.
+
+Poster title:
+Enzyme Immobilization & Therapeutic Approach with Advanced Techniques: Current Status.
+
+Organized by the Department of Translation & Clinical Research, School of Chemical & Life Sciences, Jamia Hamdard.`,
+  cover:"photos/NC-%20Jamia%20Delhi.jpg",
+  photos:["photos/NC-%20Jamia%20Delhi.jpg"]
+ },
+ {
+  id:"nc-rohroo",
+  title:"National Conference — Integrated Approaches in Drug Development",
+  category:"Conferences",
+  date:"Date to be confirmed",
+  location:"Govt. College of Pharmacy, Rohroo, Himachal Pradesh",
+  description:`Organized by Govt. College of Pharmacy, Rohroo, Shimla district, Himachal Pradesh, and the Department of Technical Education, Himachal Pradesh.
+
+E-poster title:
+Enzyme Immobilization and Therapeutic Approach: An Advance Technique.
+
+This poster has a related topic to the Jamia Hamdard presentation, but it is a separate conference entry.`,
+  cover:"photos/NC-%20Shimla.jpg",
+  photos:["photos/NC-%20Shimla.jpg"]
+ },
+ {
+  id:"nc-industrial-trends",
+  title:"National Conference — Industrial Trends in Pharmaceutical Sciences",
+  category:"Conferences",
+  date:"6–7 February 2026",
+  location:"Online mode",
+  description:`Conference: Industrial Trends in Pharmaceutical Sciences: From Laboratory to Market
+
+Received a Certificate of Appreciation for presenting the poster:
+
+rDNA Technology as an Advanced Integrated Approach for Drug Carrier Development: Recent Updates.
+
+Represented the Department of Pharmacy, Jagannath University, Jaipur.`,
+  cover:"photos/NC-%20SPM%27s%20B.V%20Foundation%20pune.jpg",
+  photos:["photos/NC-%20SPM%27s%20B.V%20Foundation%20pune.jpg"]
+ },
+ {
+  id:"spandan",
+  title:"Spandan 2025–26 — Sports & Cultural Fest",
+  category:"Extracurricular",
+  date:"2025–2026",
+  location:"Jagannath University, Jaipur",
+  description:`Annual Sports & Cultural Fest — Spandan 2025–26
+
+🏆 Winner — Athletics (Discus Throw)
+🏆 Winner — Take the Queen (Carrom)
+🏆 Winner — Fireless Cooking
+🎯 Served as Carrom Coordinator
+
+The fest tested discipline, creativity, teamwork and leadership beyond academics. Cultural events, shared memories and DJ Night made the celebration memorable.
+
+Grateful to represent B.Pharmacy and thankful to friends, mentors and the organizing team.
+
+This entry intentionally contains details only, with no photo gallery.`,
+  cover:null,
+  photos:[]
+ },
+ {
+  id:"pharma-anveshan",
+  title:"Pharma Anveshan 2026 — Speech Competition",
+  category:"Competitions",
   date:"2026",
-  location:"Academic Conference",
-  description:"Research poster presentation and scientific exchange. Add the original poster and event photographs here.",
-  cover:"photos/poster-1.jpg",
-  photos:["photos/poster-1.jpg"]
+  location:"Venue to be confirmed",
+  description:`Secured 3rd Position in the Speech Competition at Pharma Anveshan 2026, organized on the occasion of the birth anniversary of the legendary pharmacist Prof. M. L. Schroff.`,
+  cover:null,
+  photos:[]
  },
  {
-  title:"Spandan — Sports & Activities",
+  id:"npw-telangana",
+  title:"National Pharmacy Week 2025 — Infographic Challenge",
   category:"Awards",
-  date:"2025–2026",
-  location:"Jagannath University",
-  description:"A collection of sports, cultural activities and university memories.",
-  cover:"photos/spandan-1.jpg",
-  photos:["photos/spandan-1.jpg"]
+  date:"National Pharmacy Week 2025",
+  location:"IPA–Student Forum, Telangana State Chapter",
+  description:`🏆 Secured 1st Prize in the Infographic Challenge organized during National Pharmacy Week (NPW) 2025 by IPA–Student Forum, Telangana State Chapter.
+
+Also received a Certificate of Appreciation for actively attending the NPW 2025 Webinar.
+
+This recognition strengthened my interest in communicating scientific concepts creatively.
+
+Thanks to IPA-SF Telangana State Chapter, the organizers, mentors, and Mr. Rahul Pal for their encouragement.`,
+  cover:"photos/infografic%20telanagana%20winner.jpg",
+  photos:[
+   "photos/infografic%20telanagana%20winner.jpg",
+   "photos/Telangana%20IPSFA%20Winner.jpg"
+  ]
  },
  {
-  title:"Awards & Achievements",
+  id:"best-student",
+  title:"Best Student Award",
   category:"Awards",
-  date:"2025–2026",
-  location:"University",
-  description:"Certificates and milestones from academic and extracurricular activities.",
-  cover:"photos/awards-1.jpg",
-  photos:["photos/awards-1.jpg"]
+  date:"Year to be confirmed",
+  location:"Jagannath University, Jaipur",
+  description:`Honoured to receive the Best Student Award at Jagannath University.
+
+This recognition is an important milestone in my academic journey.`,
+  cover:"photos/Best%20Student.jpg",
+  photos:["photos/Best%20Student.jpg"]
+ },
+ {
+  id:"patent-tasteaway",
+  title:"First Indian Utility Patent Application — TasteAway",
+  category:"Patents",
+  date:"Published 23 January 2026",
+  location:"Patent Office Journal of India",
+  description:`Title of invention:
+Taste-Modifying Oral Spray and Dissolvable Film Compositions Containing AMP
+
+Application number: 202511123493
+Filed: 8 December 2025
+Published: 23 January 2026
+
+Key highlights:
+• Development of oral spray and fast-dissolving film dosage forms.
+• Incorporation of adenosine monophosphate (AMP) with enhanced palatability.
+• Taste-masking strategy to address bitterness and unpleasant flavours.
+• Rapid dissolution and easy administration without water.`,
+  cover:"photos/Patent%201%20Strip.jpg",
+  photos:["photos/Patent%201%20Strip.jpg"]
+ },
+ {
+  id:"patent-second",
+  title:"Second Indian Utility Patent Application",
+  category:"Patents",
+  date:"Published 15 May 2026",
+  location:"Patent Office Journal of India",
+  description:`Title of invention:
+Dual-Layer Mechanical Friction Redistribution Condom for Chemical-Free Sensory Modulation and Delay
+
+Application number: 202611041868 A
+Filed: 1 April 2026
+Published: 15 May 2026
+
+The application was published in the Patent Office Journal of India.`,
+  cover:"photos/Patent%202%20Condom.jpg",
+  photos:["photos/Patent%202%20Condom.jpg"]
+ },
+ {
+  id:"book-chapters",
+  title:"Two Published Book Chapters — PCOS Nanotechnology",
+  category:"Publications",
+  date:"2025",
+  location:"Deep Science Publishing",
+  description:`Book: Nanotechnology-Based Next-Generation Therapeutics for Polycystic Ovary Syndrome (PCOS)
+
+Chapter 5:
+Beyond Treatment: Theranostic and Personalized Nanomedicine Approaches in (In-vitro, In-vivo and Ex-vivo) PCOS
+
+Publisher link: https://lnkd.in/ghGewua7
+
+Chapter 7:
+Translational Challenges and Future Directions in 3-D for PCOS Nanotherapy
+
+Publisher link: https://lnkd.in/gKZ2654z
+
+DOI verification is still required. The links supplied so far are short links, so they are not labelled as DOI until the actual DOI is confirmed.`,
+  cover:null,
+  photos:[],
+  links:[
+   {label:"Open Chapter 5 link",url:"https://lnkd.in/ghGewua7"},
+   {label:"Open Chapter 7 link",url:"https://lnkd.in/gKZ2654z"}
+  ]
  }
 ];
 
 const $ = id => document.getElementById(id);
 $("year").textContent = new Date().getFullYear();
+
 let activeCategory = "All";
+let searchTerm = "";
 
 function make(tag, cls, text) {
- const node = document.createElement(tag);
- if(cls) node.className = cls;
- if(text !== undefined) node.textContent = text;
- return node;
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function categories() {
+  return ["All", ...new Set(EVENTS.map(e => e.category))];
 }
 
 function renderFilters() {
- const categories = ["All", ...new Set(EVENTS.map(e => e.category))];
- const box = $("filters");
- box.replaceChildren();
- categories.forEach(category => {
-  const button = make("button", activeCategory === category ? "active" : "", category);
-  button.onclick = () => {
-   activeCategory = category;
-   renderFilters();
-   renderCards();
-  };
-  box.append(button);
- });
+  const box = $("filters");
+  box.replaceChildren();
+
+  categories().forEach(category => {
+    const button = make(
+      "button",
+      activeCategory === category ? "active" : "",
+      category
+    );
+    button.type = "button";
+    button.setAttribute("aria-pressed", activeCategory === category);
+    button.onclick = () => {
+      activeCategory = category;
+      renderFilters();
+      renderCards();
+    };
+    box.append(button);
+  });
 }
 
-function openAlbum(event) {
- $("mCategory").textContent = event.category;
- $("mTitle").textContent = event.title;
- $("mMeta").textContent = [event.date, event.location].filter(Boolean).join(" · ");
- $("mDescription").textContent = event.description || "";
- const box = $("mPhotos");
- box.replaceChildren();
- event.photos.forEach(path => {
-  const img = make("img");
-  img.src = path;
-  img.alt = event.title;
-  img.loading = "lazy";
-  img.onerror = () => { img.style.display = "none"; };
-  img.onclick = () => {
-   $("lightboxImg").src = path;
-   $("lightbox").classList.add("open");
-  };
-  box.append(img);
- });
- $("modal").classList.add("open");
+function matches(event) {
+  const haystack = [
+    event.title, event.category, event.date,
+    event.location, event.description
+  ].join(" ").toLowerCase();
+
+  return (activeCategory === "All" || event.category === activeCategory)
+    && haystack.includes(searchTerm);
 }
 
 function renderCards() {
- const box = $("gallery");
- box.replaceChildren();
- const visible = EVENTS.filter(e => activeCategory === "All" || e.category === activeCategory);
- visible.forEach(event => {
-  const card = make("article", "card");
-  const img = make("img", "cover");
-  img.src = event.cover;
-  img.alt = event.title;
-  img.loading = "lazy";
-  img.onerror = () => { img.style.visibility = "hidden"; };
-  card.append(img);
+  const box = $("gallery");
+  box.replaceChildren();
 
-  const body = make("div", "body");
-  body.append(make("span", "pill", event.category));
-  body.append(make("h2", "", event.title));
-  body.append(make("div", "meta", [event.date, event.location].filter(Boolean).join(" · ")));
-  body.append(make("p", "", event.description));
-  const btn = make("button", "btn", `Open album · ${event.photos.length} photos`);
-  btn.onclick = () => openAlbum(event);
-  body.append(btn);
-  card.append(body);
-  box.append(card);
- });
+  const visible = EVENTS.filter(matches);
+  $("empty").hidden = visible.length !== 0;
+
+  visible.forEach(event => {
+    const card = make("article", "card");
+
+    if (event.cover) {
+      const img = make("img", "cover");
+      img.src = event.cover;
+      img.alt = event.title;
+      img.loading = "lazy";
+      img.onerror = () => {
+        img.remove();
+        const fallback = make("div", "no-cover", "✦");
+        fallback.setAttribute("aria-hidden", "true");
+        card.prepend(fallback);
+      };
+      card.append(img);
+    } else {
+      const fallback = make("div", "no-cover", "✦");
+      fallback.setAttribute("aria-hidden", "true");
+      card.append(fallback);
+    }
+
+    const body = make("div", "body");
+    body.append(make("span", "pill", event.category));
+    body.append(make("h2", "", event.title));
+    body.append(make(
+      "div", "meta",
+      [event.date, event.location].filter(Boolean).join(" · ")
+    ));
+
+    const summary = event.description.split("\n").find(line =>
+      line.trim() && !line.trim().startsWith("•") && !line.trim().startsWith("🏆")
+    ) || "Open to explore event details.";
+    body.append(make("p", "", summary.slice(0, 175)));
+
+    const buttonLabel = event.photos.length
+      ? `View details & photos · ${event.photos.length}`
+      : "View event details";
+
+    const button = make("button", "btn", buttonLabel);
+    button.type = "button";
+    button.onclick = () => openAlbum(event);
+    body.append(button);
+
+    card.append(body);
+    box.append(card);
+  });
 }
-$("closeModal").onclick = () => $("modal").classList.remove("open");
-$("modal").onclick = e => { if(e.target === $("modal")) $("modal").classList.remove("open"); };
+
+function openAlbum(event) {
+  $("mCategory").textContent = event.category;
+  $("mTitle").textContent = event.title;
+  $("mMeta").textContent =
+    [event.date, event.location].filter(Boolean).join(" · ");
+
+  $("mDescription").textContent = event.description || "";
+
+  const linksBox = $("mLinks");
+  linksBox.replaceChildren();
+
+  (event.links || []).forEach(link => {
+    const a = make("a", "btn", link.label);
+    a.href = link.url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.style.textDecoration = "none";
+    linksBox.append(a);
+  });
+
+  const photosBox = $("mPhotos");
+  photosBox.replaceChildren();
+
+  let loadedPhotos = 0;
+  const note = $("photoNote");
+  note.textContent = event.photos.length ? "Loading photos…" :
+    "This event has details only; no photos have been added.";
+
+  event.photos.forEach(path => {
+    const img = make("img");
+    img.src = path;
+    img.alt = event.title;
+    img.loading = "lazy";
+
+    img.onload = () => {
+      loadedPhotos++;
+      note.textContent = `${loadedPhotos} of ${event.photos.length} photos loaded`;
+    };
+
+    img.onerror = () => {
+      img.remove();
+      note.textContent = "Some photos could not load. The filename or folder path may need checking.";
+    };
+
+    img.onclick = () => {
+      $("lightboxImg").src = path;
+      $("lightbox").classList.add("open");
+    };
+
+    photosBox.append(img);
+  });
+
+  $("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+  $("closeModal").focus();
+}
+
+function closeAlbum() {
+  $("modal").classList.remove("open");
+  $("lightbox").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+$("search").addEventListener("input", event => {
+  searchTerm = event.target.value.trim().toLowerCase();
+  renderCards();
+});
+
+$("closeModal").onclick = closeAlbum;
+$("modal").onclick = event => {
+  if (event.target === $("modal")) closeAlbum();
+};
 $("lightbox").onclick = () => $("lightbox").classList.remove("open");
-document.onkeydown = e => { if(e.key === "Escape") { $("modal").classList.remove("open"); $("lightbox").classList.remove("open"); } };
+$("lightbox").onkeydown = event => {
+  if (event.key === "Enter" || event.key === " ") {
+    $("lightbox").classList.remove("open");
+  }
+};
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    $("lightbox").classList.remove("open");
+    closeAlbum();
+  }
+});
+
 renderFilters();
 renderCards();
 </script>
