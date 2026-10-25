@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albums & Events | KamalDaal</title>
+<style>
+:root{--bg:#030303;--gold:#d4af37;--gold2:#ffe7a0;--text:#f6f3ea;--muted:#aaa49a;--line:#493a17}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#211805,transparent 45%),var(--bg);color:var(--text);font:16px/1.6 system-ui,sans-serif}
+.wrap{max-width:1200px;margin:auto;padding:24px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+a{color:var(--gold2)}
+.brand{font-weight:900;letter-spacing:2px}.brand span{color:var(--gold)}
+.hero{padding:55px 0 25px}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:12px}
+h1{font-size:clamp(38px,7vw,76px);line-height:1.05;margin:12px 0}
+.gold{background:linear-gradient(90deg,#b8860b,#ffe7a0,#d4af37);color:transparent;background-clip:text}
+.hero p{max-width:650px;color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
+.filters button,.open,.close{border:1px solid var(--line);border-radius:10px;background:#100d06;color:var(--gold2);padding:9px 14px;cursor:pointer}
+.filters button.active{background:#332608;border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#090909;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 10px 35px #d4af3725}
+.cover{width:100%;height:220px;object-fit:cover;background:#111;display:block}
+.body{padding:16px}.body h2{font-size:20px;margin:8px 0}.meta,.muted{color:var(--muted);font-size:14px}
+.pill{display:inline-block;color:var(--gold2);border:1px solid var(--line);border-radius:30px;padding:3px 9px;font-size:12px}
+.body p{color:#c5c0b5}.notice{color:var(--muted);padding:24px 0}
+.modal{display:none;position:fixed;inset:0;background:#000e;z-index:5;overflow:auto;padding:20px}
+.modal.open{display:block}.modalbox{max-width:1000px;margin:4vh auto;background:#090909;border:1px solid var(--line);border-radius:18px;padding:20px}
+.modalhead{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:20px}
+.photos img{width:100%;height:230px;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:zoom-in}
+.lightbox{display:none;position:fixed;inset:0;background:#000f;z-index:10;align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}.lightbox img{max-width:95vw;max-height:90vh;object-fit:contain}
+footer{margin-top:45px;padding:20px 0;border-top:1px solid var(--line);color:#777}
+@media(max-width:600px){.wrap{padding:16px}.hero{padding-top:35px}.cover{height:190px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><div class="brand">KAMAL<span>DAAL</span></div><div><a href="./index.html">Home</a>　<a href="./albums.html">Albums</a></div></nav>
+<section class="hero">
+<div class="eyebrow">EVENTS · MILESTONES · MEMORIES</div>
+<h1>Every chapter.<br><span class="gold">A story worth keeping.</span></h1>
+<p>A visual journal of internships, research posters, competitions, conferences, certificates and achievements.</p>
+</section>
+<div id="filters" class="filters"></div>
+<div id="gallery" class="grid"><p class="notice">Loading albums…</p></div>
+<footer>© <span id="year"></span> KamalDaal · Research, innovation & pharmacy</footer>
+</div>
+<div id="modal" class="modal"><div class="modalbox">
+<div class="modalhead"><div><span id="mCategory" class="pill"></span><h2 id="mTitle"></h2><div id="mMeta" class="meta"></div><p id="mDescription"></p></div><button id="closeModal" class="close">Close ✕</button></div>
+<div id="mPhotos" class="photos"></div>
+</div></div>
+<div id="lightbox" class="lightbox"><img id="lightboxImg" alt="Expanded event photo"></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import {getFirestore,collection,getDocs,query,where} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+/* REPLACE THESE VALUES WITH YOUR FIREBASE WEB APP CONFIG */
+const firebaseConfig={
+ apiKey:"PASTE_API_KEY_HERE",
+ authDomain:"YOUR_PROJECT_ID.firebaseapp.com",
+ projectId:"YOUR_PROJECT_ID",
+ storageBucket:"YOUR_PROJECT_ID.firebasestorage.app",
+ messagingSenderId:"PASTE_MESSAGING_SENDER_ID_HERE",
+ appId:"PASTE_APP_ID_HERE"
+};
+
+const $=id=>document.getElementById(id);
+$("year").textContent=new Date().getFullYear();
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+let events=[],category="All";
+function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
+function renderFilters(){
+ const cats=["All",...new Set(events.map(e=>e.category||"Other"))];
+ const box=$("filters");box.replaceChildren();
+ cats.forEach(c=>{const b=el("button",c===category?"active":"",c);b.onclick=()=>{category=c;renderFilters();renderCards()};box.append(b)});
+}
+function renderCards(){
+ const box=$("gallery");box.replaceChildren();
+ const shown=events.filter(e=>category==="All"||(e.category||"Other")===category);
+ if(!shown.length){box.append(el("p","notice","No published albums yet. Create an album in your admin dashboard and publish it."));return}
+ shown.forEach(ev=>{
+  const card=el("article","card");
+  const img=el("img","cover");img.src=ev.coverUrl||(ev.photos||[])[0]?.url||"";img.alt=(ev.title||"Event")+" cover";img.loading="lazy";card.append(img);
+  const body=el("div","body");body.append(el("span","pill",ev.category||"Event"),el("h2","",ev.title||"Untitled event"),el("div","meta",[ev.date,ev.location].filter(Boolean).join(" · ")));
+  const desc=el("p","",ev.description||"");if(desc.textContent.length>130)desc.textContent=desc.textContent.slice(0,127)+"…";body.append(desc);
+  const btn=el("button","open",`View album · ${(ev.photos||[]).length} photo(s)`);btn.onclick=()=>openEvent(ev);body.append(btn);card.append(body);box.append(card);
+ });
+}
+function openEvent(ev){
+ $("mCategory").textContent=ev.category||"Event";$("mTitle").textContent=ev.title||"";$("mMeta").textContent=[ev.date,ev.location].filter(Boolean).join(" · ");$("mDescription").textContent=ev.description||"";
+ const box=$("mPhotos");box.replaceChildren();
+ (ev.photos||[]).forEach(p=>{if(!p.url)return;const img=el("img");img.src=p.url;img.alt=p.name||ev.title||"Event photo";img.loading="lazy";img.onclick=()=>{$("lightboxImg").src=p.url;$("lightbox").classList.add("open")};box.append(img)});
+ if(!box.children.length&&ev.coverUrl){const img=el("img");img.src=ev.coverUrl;img.alt=ev.title||"Event cover";box.append(img)}
+ $("modal").classList.add("open");
+}
+$("closeModal").onclick=()=>$("modal").classList.remove("open");
+$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").classList.remove("open")};
+$("lightbox").onclick=()=>$("lightbox").classList.remove("open");
+document.onkeydown=e=>{if(e.key==="Escape"){$("modal").classList.remove("open");$("lightbox").classList.remove("open")}};
+try{
+ const snap=await getDocs(query(collection(db,"events"),where("published","==",true)));
+ events=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+ renderFilters();renderCards();
+}catch(err){
+ $("gallery").replaceChildren(el("p","notice","Firebase config abhi set nahi hui, ya Firestore rules/config mein issue hai. Firebase config complete hone ke baad albums load honge."));
+}
+</script>
+</body>
+</html>
